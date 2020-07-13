@@ -36,7 +36,7 @@ Most of the classes used in this document are formatted by the included Bootstra
 
 ## Downloads
 ### Default set
-If the set has been consigured to allow downloads, then the HTML page will include a download button automatically. You do not need to change a thing.
+If the set has been configured to allow downloads, then the HTML page will include a download button automatically. You do not need to change a thing.
 ### Alternate set
 You may wish to allow visitors to download a different version of the set, perhaps a version that includes more columns than you wish to display on the HTML page.
 Included on the index.html page is the code for a <button> that can launch the download of a different set from OCHRE.
