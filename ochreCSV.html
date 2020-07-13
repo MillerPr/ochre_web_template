@@ -18,7 +18,7 @@
 
     function displayResult() {
       //The uuid value comes from the button click ID.
-      xml = loadXMLDoc("http://ochre.lib.uchicago.edu/ochre?uuid="+uuid);
+      xml = loadXMLDoc("http://ochre.lib.uchicago.edu/ochre?uuid=" + uuid);
       xsl = loadXMLDoc("http://ochre.lib.uchicago.edu/ochre/ochre_csv.xsl");
       // code for IE
       if (window.ActiveXObject || xhttp.responseType == "msxml-document") {
@@ -32,52 +32,60 @@
         resultDocument = xsltProcessor.transformToFragment(xml, document);
         document.getElementById("tblexportData").appendChild(resultDocument);
       }
+      // onload, display the button
+      document.getElementById("preDownloadDiv").setAttribute("style", "display: none;");
+      document.getElementById("downloadDiv").setAttribute("style", "display: block;");
     }
 
     //Code used to download div to CSV
 
-      function exportToCSV(filename = '') {
-        var downloadurl;
-        var dataFileType = 'text/csv';
-        var rawData = document.getElementById("tblexportData");
-        var csvData = rawData.innerHTML;
+    function exportToCSV(filename = '') {
+      var downloadurl;
+      var dataFileType = 'text/csv';
+      var rawData = document.getElementById("tblexportData");
+      var csvData = rawData.innerHTML;
 
-        // Specify file name
-        filename = filename ? filename + '.csv' : 'export_ochre_data.csv';
-        // Create download link element
-        downloadurl = document.createElement("a");
+      // Specify file name
+      filename = filename ? filename + '.csv' : 'export_ochre_data.csv';
+      // Create download link element
+      downloadurl = document.createElement("a");
 
-        document.body.appendChild(downloadurl);
+      document.body.appendChild(downloadurl);
 
-        if (navigator.msSaveOrOpenBlob) {
-          var blob = new Blob(['\ufeff', csvData], {
-            type: dataFileType
-          });
-          navigator.msSaveOrOpenBlob(blob, filename);
-        } else {
-          // Create a link to the file
-          downloadurl.href = 'data:' + dataFileType + ', ' + csvData;
+      if (navigator.msSaveOrOpenBlob) {
+        var blob = new Blob(['\ufeff', csvData], {
+          type: dataFileType
+        });
+        navigator.msSaveOrOpenBlob(blob, filename);
+      } else {
+        // Create a link to the file
+        downloadurl.href = 'data:' + dataFileType + ', ' + csvData;
 
-          // Setting the file name
-          downloadurl.download = filename;
+        // Setting the file name
+        downloadurl.download = filename;
 
-          //triggering the function
-          downloadurl.click();
-        }
-        window.close();
+        //triggering the function
+        downloadurl.click();
       }
+      window.close();
+    }
 
   </script>
 </head>
+
 <body onload="displayResult()">
   <div>
-    <div>
+    <div id="preDownloadDiv" style="display: block;">
+      <h2>Your file is being prepared...</h2>
+    </div>
+    <div id="downloadDiv" style="display: none;">
       <h2>The file has been formatted for download.</h2>
       <button onclick="exportToCSV()">Save As Tab-Delimited CSV File</button>
       <h2>Disable pop-up blocker to allow downloads from this page.</h2>
       <p>Note: if the columns do not align correctly, then import/open as tab-separated.</p>
     </div>
-    <div style="display: none;" id="tblexportData"/>
+    <div style="display: none;" id="tblexportData" />
   </div>
 </body>
+
 </html>
