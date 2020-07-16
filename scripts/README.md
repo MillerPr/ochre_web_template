@@ -89,7 +89,7 @@ The point here is that any set published with the download option set to TRUE ca
 
 
 ## Direct Download
-In contrast to the default method above, the Direct Download method requires user intervention from the project frontend developer. In this scenario, the project wishes to share a set of information as a CSV file, but does not wish to present that set as an HTML page first. There may be many reasons for this choice. Perhaps the set is too large to present as HTML. Perhaps the idea is simply to place the download link/button in a place where an HTML table doesn't make sense. In any case, in this scenario, the project publishes a set from OCHRE as usual. The frontend developer assigns the UUID of the set to a link or button.
+In contrast to the default method above, the Direct Download method requires user intervention from the project frontend developer. In this scenario, the project wishes to share a set of information as a direct download, but does not wish to present that set as an HTML page first. There may be many reasons for this choice. Perhaps the set is too large to present as HTML. Perhaps the idea is simply to place the download link/button in a place where an HTML table doesn't make sense. In any case, in this scenario, the project publishes a set from OCHRE as usual. The frontend developer assigns the UUID of the set to a link or button.
 ```html
 <button id="uuid" onclick="openCSVPage(this.id)">
   Prepare Download
@@ -105,7 +105,7 @@ This button launches a script that will open a download page and pass the set UU
     }
   </script>
 ```
-The ochreCSV.html page includes various scripts that will launch when the page is loaded, the will download a CSV when a button is clicked. See the onload attribute of body. Notice also that the divs on this page are styled to either display or not display. By default, the page gives a friendly message indicating that the file is being prepared. This message stays on the screen until the displayResult() script is complete. This brief moment represents the duration of the XSLT transformation.
+The ochreCSV.html page includes a script that will launch when the page is loaded. See the onload attribute of body. Notice also that the divs on this page are styled to either display or not display. By default, the page gives a friendly message indicating that the file is being prepared. This message stays on the screen until the displayResult() script is complete. (Results may vary across browsers.) This brief moment represents the duration of the XSLT transformation.
 ```html
 <body onload="displayResult()">
   <div>
@@ -114,7 +114,7 @@ The ochreCSV.html page includes various scripts that will launch when the page i
     </div>
     <div id="downloadDiv" style="display: none;">
       <h2>The file has been formatted for download.</h2>
-      <button onclick="exportToCSV()">Save As Tab-Delimited CSV File</button>
+      <button onclick="exportTableToCSV('ochreDataCSV.csv')">Save As Tab-Delimited CSV File</button>
       <h2>Disable pop-up blocker to allow downloads from this page.</h2>
       <p>Note: if the columns do not align correctly, then import/open as tab-separated.</p>
     </div>
@@ -122,7 +122,7 @@ The ochreCSV.html page includes various scripts that will launch when the page i
   </div>
 </body>
 ```
-The defaul script performs an XSLT transformation that delivers the output to a hidden div on the html page. This code is pretty much boiler plate stuff that can be found on various sites. The update for our purposes is the use of the uuid variable delivered to this page from the click that launched this page. The other unique twist in our version of the script is the div display manipulation. Once the transformation is complete, we hide the default message and display that div that includes the download button. (This little trick seems not to work in Safari.)
+The default script performs an XSLT transformation that delivers the output to a hidden div on the html page. This code is pretty much boiler plate stuff that can be found on various sites. The update for our purposes is the use of the **uuid** variable delivered to this page from the click that launched this page. The other unique twist in our version of the script is the div display manipulation. Once the transformation is complete, we hide the default message and display that div that includes the download button. (This little trick seems not to work in Safari.)
 ```JavaScript
     function loadXMLDoc(filename) {
       if (window.ActiveXObject) {
@@ -158,42 +158,59 @@ The defaul script performs an XSLT transformation that delivers the output to a 
       document.getElementById("downloadDiv").setAttribute("style", "display: block;");
     }
 ```
-This transformation uses a customized XSLT file that creates tab-delimited output. The XSLT expects a standard DNF-XML file from OCHRE, containing an //items node. After the //items node, the set may contain any type of item, e.g. //items/spatialUnit/. The table heading is derived **only** from the first item in the //items list. (Note: XML nodes begin at 1, not 0.) The Name and Description column titles are hard-coded into the transformation. (Items published in a set will include an empty node when the description field is blank.) The stylesheet looks at the first item in the list and extracts the property labels to use as the remaining column titles.
+This transformation uses a customized XSLT file that creates as standard HTML table. The XSLT expects a standard DNF-XML file from OCHRE, containing an //items node. After the //items node, the set may contain any type of item, e.g. //items/spatialUnit/. The table heading is derived **only** from the first item in the //items list. (Note: XML nodes begin at 1, not 0.) The Name and Description column titles are hard-coded into the transformation. (Items published in a set will include an empty node when the description field is blank.) The stylesheet looks at the first item in the list and extracts the property labels to use as the remaining column titles.
 
 The next section performs a for-each loop on each item in the //items list to extract the values, first for the name and description, then for the attested properties. Columns are tab-delimited. Tab-delimited seems to be the best choice because names and descriptions frequently include commas, semi-colons, colons, dashes, periods, etc. They rarely (never?) include tab characters. After each property value, the stylesheet checks current node position to see if the current property value is the last in the node list. If not, it inserts a tab (\&#9;) and continues. After the final property, we insert a Line Feed character (\&#xa;) to create a new row.
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:ino="http://namespaces.softwareag.com/tamino/response2" xmlns:xql="http://metalab.unc.edu/xql" xmlns:xq="http://namespaces.softwareag.com/tamino/XQuery/result" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:output method="text" encoding="UTF-8" omit-xml-declaration="yes" media-type="text/csv"/>
+    <xsl:output method="html" encoding="UTF-8" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
     <xsl:template match="text()"> </xsl:template>
     <xsl:template match="set">
-        <!--HEADINGS ROW, NAME AND DESCRIPTION ARE DEFAULT COLUMNS-->
-        <xsl:text>Name&#9; Description</xsl:text>
-        <!--PROPERTIES AS SPECIFIED IN OCHRE ARE THE REMAINING COLUMNS, IN ORDER-->
-        <xsl:for-each select="//items/*[1]">
-            <xsl:for-each select="properties/property">
-                <xsl:text>&#9;</xsl:text>
-                <xsl:value-of select="label"/>
-            </xsl:for-each>
-        </xsl:for-each>
-        <xsl:text>&#xa;</xsl:text>
-        <!-- VALUES IN ROWS -->
-        <xsl:for-each select="//items/*">
-            <xsl:value-of select="identification/label"/>
-            <xsl:text>&#9;</xsl:text>
-            <xsl:value-of select="description"/>
-            <xsl:text>&#9;</xsl:text>
-            <xsl:for-each select="properties/property">
-                <xsl:value-of select="value"/>
-                <xsl:if test="not(position() = last())">
-                    <xsl:text>&#9; </xsl:text>
-                </xsl:if>
-            </xsl:for-each>
-            <xsl:text>&#xa;</xsl:text>
-        </xsl:for-each>
+        <table id="ochreTable">
+            <thead id="ochreTableColumns">
+                <tr>
+                    <!--NAME AND DESCRIPTION-->
+                    <th> Name </th>
+                    <th> Description </th>
+                    <!--PROPERTIES-->
+                    <xsl:for-each select="//items/*[1]">
+                        <xsl:for-each select="properties/property">
+                            <th>
+                                <xsl:value-of select="label"/>
+                            </th>
+                        </xsl:for-each>
+                    </xsl:for-each>
+                </tr>
+            </thead>
+            <tbody id="ochreTableBody">
+                <xsl:for-each select="//items/*">
+                    <xsl:variable name="uuid" select="@uuid"/>
+                    <tr class="ochreTableRows">
+                        <td class="Name">
+                            <xsl:value-of select="identification/label"/>
+                        </td>
+                        <td>
+                            <xsl:value-of select="description"/>
+                        </td>
+                        <xsl:for-each select="properties/property">
+                            <td>
+                                <xsl:for-each select="value">
+                                    <xsl:value-of select="."/>
+                                    <xsl:if test="not(position() = last())">
+                                        <xsl:text>; </xsl:text>
+                                    </xsl:if>
+                                </xsl:for-each>
+                            </td>
+                        </xsl:for-each>
+                    </tr>
+                </xsl:for-each>
+            </tbody>
+        </table>
     </xsl:template>
 </xsl:stylesheet>
+
 ```
 As a final note, we strip white space; possibly not necessary.
 ```xml
@@ -203,37 +220,4 @@ We also catch and kill any text nodes not in the set template. Without this line
 ```xml
 <xsl:template match="text()"> </xsl:template>
 ```
-
-When the page is loaded, the user can click the download button to launch the exportToCSV() script. Again, this is mostly standard script that has been shared online many times. Changes here include references to the correct document element Id, a customized CSV filename, and the final method to close the tab once the download is launched. NOTE: refreshing the page results in an error because the page loses the value of the uuid.
- ```JavaScript
-    function exportToCSV(filename = '') {
-      var downloadurl;
-      var dataFileType = 'text/csv';
-      var rawData = document.getElementById("tblexportData");
-      var csvData = rawData.innerHTML;
-
-      // Specify file name
-      filename = filename ? filename + '.csv' : 'export_ochre_data.csv';
-      // Create download link element
-      downloadurl = document.createElement("a");
-
-      document.body.appendChild(downloadurl);
-
-      if (navigator.msSaveOrOpenBlob) {
-        var blob = new Blob(['\ufeff', csvData], {
-          type: dataFileType
-        });
-        navigator.msSaveOrOpenBlob(blob, filename);
-      } else {
-        // Create a link to the file
-        downloadurl.href = 'data:' + dataFileType + ', ' + csvData;
-
-        // Setting the file name
-        downloadurl.download = filename;
-
-        //triggering the function
-        downloadurl.click();
-      }
-      window.close();
-    }
- ```
+When the page is loaded, the user can click the download button to launch the exportTableToCSV() script. This launches the same script as in the scenario above.
