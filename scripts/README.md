@@ -220,4 +220,4 @@ We also catch and kill any text nodes not in the set template. Without this line
 ```xml
 <xsl:template match="text()"> </xsl:template>
 ```
-When the page is loaded, the user can click the download button to launch the exportTableToCSV() script. This launches the same script as in the scenario above. I had wanted to close the tab once the download starts, but this behavior varies based on user-configuration of the browswer for file downloads.
+When the page is loaded, the user can click the download button to launch the exportTableToCSV() script. This launches the same script as in the scenario above. I had wanted to close the tab once the download starts, but this behavior varies based on user-configuration of the browser for file downloads.
