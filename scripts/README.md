@@ -26,7 +26,7 @@ If the set is published with the download option set to TRUE, then a download bu
   </button>
 </div>
 ```
-The button launches a .js script called exportTableToCSV() that is embedded in the HTML page by the XSLT. The function in this script takes one argument, the filename. The function queries for the headings and rows, capturing the node list in the variables defined in the first section.
+The button launches a function called exportTableToCSV() that is loaded by the script ochreSet.js. The function in this script takes one argument, the filename. The function queries for the headings and rows, capturing the node list in the variables defined in the first section.
 
 For example, the headings variable queries the DOM for nodes contained in the thead > tr context. It finds a nodelist of "th" elements, i.e. the column labels. The script assumes that the length of the headings list is 1, i.e. one row of heading labels. Within the headings nodelist, we query for all "th" elements and assign them to the cols variable. The cols variable will have a length that matches the number of column headings. We iterate over the cols variable and grab the innerText value of each node, pushing each value to the row list. Then we push each row value to the final csv variable, separating with a tab.
 
@@ -57,7 +57,7 @@ function exportTableToCSV(filename) {
   downloadCSV(csv.join("\n"), filename);
 }
 ```
-The script ends by calling a second script that downloads the CSV file. This script comes from various online samples, will slight updates to accomodate CSV format.
+The function ends by calling a second function that downloads the CSV file. This function comes from various online samples, will slight updates to accomodate CSV format.
 ```JavaScript
 function downloadCSV(csv, filename) {
   var csvFile;
@@ -89,7 +89,7 @@ The point here is that any set published with the download option set to TRUE ca
 
 
 ## Direct Download
-In contrast to the default method above, the Direct Download method requires user intervention from the project frontend developer. In this scenario, the project wishes to share a set of information as a direct download, but does not wish to present that set as an HTML page first. There may be many reasons for this choice. Perhaps the set is too large to present as HTML. Perhaps the idea is simply to place the download link/button in a place where an HTML table doesn't make sense. In any case, in this scenario, the project publishes a set from OCHRE as usual. The frontend developer assigns the UUID of the set to a link or button.
+In contrast to the default method above, the Direct Download method requires user intervention from the project frontend developer. In this scenario, the project wishes to share a set of information as a direct download, but does not wish to present that set as an HTML page first. There may be many reasons for this choice. Perhaps the set has too many columns to present as HTML, or perhaps the data is so sparse that it doesn't make sense to view as a table. Perhaps the idea is simply to place the download link/button in a place where an HTML table doesn't make sense. In any case, in this scenario, the project publishes a set from OCHRE as usual. The frontend developer assigns the UUID of the set to a link or button.
 ```html
 <button id="uuid" onclick="openCSVPage(this.id)">
   Prepare Download
@@ -220,4 +220,4 @@ We also catch and kill any text nodes not in the set template. Without this line
 ```xml
 <xsl:template match="text()"> </xsl:template>
 ```
-When the page is loaded, the user can click the download button to launch the exportTableToCSV() script. This launches the same script as in the scenario above.
+When the page is loaded, the user can click the download button to launch the exportTableToCSV() script. This launches the same script as in the scenario above. I had wanted to close the tab once the download starts, but this behavior varies based on user-configuration of the browswer for file downloads.
