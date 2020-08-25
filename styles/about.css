@@ -1,0 +1,59 @@
+body, html {
+    height: 100%;
+}
+
+.title {
+    margin-top: 51px;
+    background-image: url("../assets/image2.jpg"); /* replace ../assets/image2.jpg with path to desired background image */
+    background-color: green; /* put desired background color here, for if image is unavailable */
+    color: white; /* put desired text color here */
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.title h1 {
+    font-size: 48px;
+}
+
+.bg {
+    padding-top: 20px;
+    background-color: white; /* replace this with desired background color for body of page */
+}
+
+.col-sm-8 h3 {
+    /* font-size:  */
+    /* If you would like to change the font size for the section titles, uncomment the line above and add your desired font size. */
+    /* color: white; */
+    /* If you would like to change the text color for the section titles, uncomment the line above and replace with your desired text color. */
+    /* font-family:  */
+    /* If you would like to change the font for the section titles, uncomment the line above and add your desired font. */
+    /* font-weight:  */
+    /* If you would like to change the font weight (e.g. normal, bold, etc.) for the section titles, uncomment the line above and add your desired font weight. */
+}
+
+.col-sm-8 p {
+    font-size: 16px; /* replace this with desired font size for body text */
+    /* color: white; */
+    /* If you would like to change the text color for the body of every section, uncomment the line above and replace with your desired text color. */
+    /* font-family:  */
+    /* If you would like to change the font for the body text of every section, uncomment the line above and add your desired font. */
+    /* font-weight:  */
+    /* If you would like to change the font weight (e.g. normal, bold, etc.) for the body text of every section, uncomment the line above and add your desired font weight. */
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+img {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 85%;
+    height: auto;
+}

@@ -1,0 +1,48 @@
+body, html {
+    height: 100%;
+}
+
+/* default settings; these settings are used unless overridden by settings for specific screen size */
+.bg {
+    margin-top: 10%;
+    background-color: pink; /* replace "pink" with your desired background color for small screens */
+    height: 100%;
+}
+
+.container {
+    text-align: center;
+    color: black; /* replace "black" with your desired text color for the title */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* replace with your desired font for title */
+    font-weight: bold; /* optional */
+}
+
+.container h1 {
+    font-size: 40px; /* replace with desired font size for title */
+}
+
+.text {
+    color: black; /* replace "black" with your desired text color for description */
+    font-family: sans-serif; /* replace with your desired font for description */
+    font-size: 16px; /* replace with desired font size for description */
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 30px;
+}
+
+/* settings that only apply to screen size small or bigger */
+@media (min-width: 576px) {
+  .bg {
+      margin-top: 5%;
+  }
+}
+
+/* settings that only apply to screen size medium or bigger */
+@media (min-width: 768px) {
+    .bg {
+	margin-top: 4%;
+	background-image: url("http://ochre.lib.uchicago.edu/ochre?uuid=03f3209b-291d-442b-88f2-f9c064fea259&image"); /* replace this with image for your project */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+    }
+}
