@@ -6,6 +6,8 @@ This repository contains functioning templates for web pages designed to allow y
 
 You will find two approaches to the primary index.html file. One index.html is a text-based home page. The other index file is a splash page with a prominent background image. You should choose one approach. Your homepage should be named index.html.
 
+Each project will be configured as a separate private GitHub repository by ODS. Project web developers will have access to edit this code and push changes to the repo.
+
 ## Directories
 **assets** The assets directory contains sample images. You may delete the sample images and add your own images.
 **css** The css directory contains cascading stylesheets. Note that each html page points to one of these stylesheets.
