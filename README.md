@@ -4,7 +4,7 @@ Open resources for working with data published from the OCHRE platform.
 # ochre-templates
 This repository contains functioning templates for web pages designed to allow you to easily create a website for your project.  These templates are specifically designed to pull images and data dynamically from the OCHRE database, so the website will be automatically updated along with the information in the database.
 
-You will find two approaches to the primary index.html file. One index.html is a text-based home page. The other index file is a splash page with a prominent background image. You should choose one approach. Your homepage should be named index.html.
+You will find three approaches to the primary index.html file. Index.html is a basic splash page with very few details. Index_01.html is a text-based home page with placeholder for various OCHRE API links. Index_02.html is a splash page with a prominent background image. You should choose one approach. Your homepage should be named index.html.
 
 Each project will be configured as a separate private GitHub repository by ODS. Project web developers will have access to edit this code and push changes to the repo.
 
@@ -16,7 +16,7 @@ Each project will be configured as a separate private GitHub repository by ODS. 
 **images** We include some OCHRE images for branding purposes. We ask that you use these somewhere on the webpage.
 **scripts** The required Bootstrap files are included in this template package so this page may be viewed offline.
 Before going live, consider loading Bootstrap and the other scripts using a CDN instead.
-Also included is a script to launch the ochreCSV.html page. See the Downloads section for details.
+Also included is a script to launch the ochreCVS.html page. See the Downloads section for details.
 
 ## List of HTML files
 **about.html:** Template for an "About" page, for general information about your project.\
@@ -24,8 +24,9 @@ Also included is a script to launch the ochreCSV.html page. See the Downloads se
 **gallery-collection.html:** Template for an image gallery with the images laid out in a grid formation.\
 **gallery-referencestrip.html:** Template for an image gallery where the user views one image at at time, with a scrolling strip containing previews of the other images along the bottom.\
 **hotspots.html** Template for loading an image with OCHRE hotspots.\
-**index_02.html:** Template for a image-based splash page.\
 **index.html:** Template for the homepage of the website.\
+**index_01.html** Template for the homepage including links.\
+**index_02.html:** Template for a image-based splash page.\
 **ochre.CSV.html** A page to help loading CVS downloads. Leave as is.\
 
 ## List of customizable CSS files
@@ -44,9 +45,10 @@ Also included is a script to launch the ochreCSV.html page. See the Downloads se
 
 ## How to use
 
-### index.html and index_02.html
+### index.html, index_01.html, and index_02.html
+Choose between three basic template styles. Your final choice for index must be named index.html. So, if you choose index_01.html, just delete the existing index.html and change your homepage to index.html.
 
-When you open up one of these starter templates, you will want to customize much of the information. Index.html contains comments at the top of the page to guide you through the process. The fields and values to change have been marked with two percentage signs %%. Search for %% and update the information to the desired value. Add or remove HTML elements as needed.
+When you open up one of these starter templates, you will want to customize much of the information. Each file contains comments at the top of the page to guide you through the process. The fields and values to change have been marked with two percentage signs %%. Search for %% and update the information to the desired value. Add or remove HTML elements as needed.
 
 **The remainder of this section deals with index_02.html.**
 
