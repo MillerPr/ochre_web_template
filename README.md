@@ -46,7 +46,7 @@ Also included is a script to launch the ochreCVS.html page. See the Downloads se
 ## How to use
 
 ### index.html, index_01.html, and index_02.html
-Choose between three basic template styles. Your final choice for index must be named index.html. So, if you choose index_01.html, just delete the existing index.html and change your homepage to index.html.
+Choose between three basic template styles. Your final choice for index must be named 'index.html'. So, if you choose index_01.html, just delete the existing index.html and change your homepage to index.html.
 
 When you open up one of these starter templates, you will want to customize much of the information. Each file contains comments at the top of the page to guide you through the process. The fields and values to change have been marked with two percentage signs %%. Search for %% and update the information to the desired value. Add or remove HTML elements as needed.
 
