@@ -6,35 +6,35 @@ This repository contains functioning templates for web pages designed to allow y
 
 You will find three approaches to the primary index.html file. Index.html is a basic splash page with very few details. Index_01.html is a text-based home page with placeholder for various OCHRE API links. Index_02.html is a splash page with a prominent background image. You should choose one approach. Your homepage should be named index.html.
 
-Each project will be configured as a separate private GitHub repository by ODS. Project web developers will have access to edit this code and push changes to the repo.
+Each project will be configured as a separate private GitHub repository by the ODS. Project web developers will have access to edit this code and push changes to the repo.
 
 ## Directories
-**assets** The assets directory contains sample images. You may delete the sample images and add your own images.
-**css** The css directory contains cascading stylesheets. Note that each html page points to one of these stylesheets.
-**icons** These files should create useful favicons in browsers and mobile links.
-**image-map-resize** This directory contains some technical details needed for displaying images on the hotspots.html page.
-**images** We include some OCHRE images for branding purposes. We ask that you use these somewhere on the webpage.
-**scripts** The required Bootstrap files are included in this template package so this page may be viewed offline.
+**assets:** The assets directory contains sample images. You may delete the sample images and add your own images.\
+**css:** The css directory contains cascading stylesheets. Note that each html page points to one of these stylesheets.\
+**icons:** These files should create useful favicons in browsers and mobile links.\
+**image-map-resize:** This directory contains some technical details needed for displaying images on the hotspots.html page.\
+**images:** We include some OCHRE images for branding purposes. We ask that you use these somewhere on the webpage.\
+**scripts:** The required Bootstrap files are included in this template package so this page may be viewed offline.\
 Before going live, consider loading Bootstrap and the other scripts using a CDN instead.
 Also included is a script to launch the ochreCVS.html page. See the Downloads section for details.
 
 ## List of HTML files
-**about.html:** Template for an "About" page, for general information about your project.\
-**contact.html:** Template for a page with contact information for your project.\
-**gallery-collection.html:** Template for an image gallery with the images laid out in a grid formation.\
-**gallery-referencestrip.html:** Template for an image gallery where the user views one image at at time, with a scrolling strip containing previews of the other images along the bottom.\
-**hotspots.html** Template for loading an image with OCHRE hotspots.\
-**index.html:** Template for the homepage of the website.\
-**index_01.html** Template for the homepage including links.\
-**index_02.html:** Template for a image-based splash page.\
-**ochre.CSV.html** A page to help loading CVS downloads. Leave as is.\
+**about.html:** template for an "About" page, for general information about your project.\
+**contact.html:** template for a page with contact information for your project.\
+**gallery-collection.html:** template for an image gallery with the images laid out in a grid formation.\
+**gallery-referencestrip.html:** template for an image gallery where the user views one image at at time, with a scrolling strip containing previews of the other images along the bottom.\
+**hotspots.html** template for loading an image with OCHRE hotspots.\
+**index.html:** template for the homepage of the website.\
+**index_01.html** template for the homepage including links.\
+**index_02.html:** template for a image-based splash page.\
+**ochre.CSV.html** A page to help loading CVS downloads. Leave as is.
 
 ## List of customizable CSS files
-**about.css:** Template for the stylesheet for the "About" page.\
-**contact.css:** Template for the stylesheet for the contact page.\
-**gallery.css:** Template for the stylesheet for the image gallery.  This style will apply to whichever of the two gallery options you choose.\
-**homepage.css:** Template for the index_02 file.\
-**TEMPLATE.css:** Template for the stylesheet for the homepage.\
+**about.css:** template for the stylesheet for the "About" page.\
+**contact.css:** template for the stylesheet for the contact page.\
+**gallery.css:** template for the stylesheet for the image gallery.  This style will apply to whichever of the two gallery options you choose.\
+**homepage.css:** template for the index_02 file.\
+**TEMPLATE.css:** template for the stylesheet for the homepage.
 
 ## List of JavaScript files
 **gallery-collection.js:** Contains the code necessary for the grid-style image gallery to function.\
